@@ -44,4 +44,29 @@ $.fn.hexGridWidget = function (radius, columns, rows, cssClass) {
 
 //End of HexGridWidget
 
-$('#floorplan').hexGridWidget(55, 11, 5, 'hexfield')
+$('#floorplan').hexGridWidget(55, 11, 5, 'hexfield');
+$('.game-window').hide();
+$('.night').hide();
+$('.room-image').hide();
+
+const $fadeInGameWindow = () => {
+	$('.game-window').fadeIn(1500);
+}
+
+const $fadeInRoom = () => {
+	$('.room-image').show($fadeInGameWindow);
+}
+
+const $fadeInNight = () => {
+	$('.night').show($fadeInRoom);
+}
+
+$('#floorplan .hexfield').click(function () {
+	$fadeInNight();
+});
+
+$('.decision-btn').on('click', () => {
+	$('.room-image').fadeOut(100);
+	$('.game-window').fadeOut(100);
+	$('.night').fadeOut(1000);
+})

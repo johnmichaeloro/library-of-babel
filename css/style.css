@@ -18,7 +18,7 @@ body, html {
   left: -50%;
   min-width: 200%;
   min-height: 200%;
-  background-color: rgba(238, 220, 190, 0.69);
+  background-color: rgba(238, 220, 190, 0.7);
 }
 
 #background #library {
@@ -30,6 +30,15 @@ body, html {
   margin: auto;
   min-width: 50%;
   min-height: 50%;
+}
+
+.night {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  min-width: 200%;
+  min-height: 200%;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 #container {
@@ -57,7 +66,7 @@ body, html {
   margin-left:auto;
   margin-right:auto;
   width:100px;
-  border-spacing: 70px 8px;
+  border-spacing: 80px 8px;
   margin-bottom: 0;
   padding-bottom: 0;
   font-weight: bolder;
@@ -74,6 +83,45 @@ body, html {
   margin-bottom: 5px;
 }
 
+.game-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Gentium Book Basic', serif;
+  font-size: 26px;
+  text-shadow: 20px 20px 20px rgb(238, 220, 190);
+  font-weight: bolder;
+}
+
+p {
+  position: relative;
+  padding-top: 40px;
+  padding-left: 35px;
+  padding-right: 35px;
+}
+
+.decision-btn {
+  font-family: 'Gentium Book Basic', serif;
+  background-color: transparent;
+  font-size: 26px;
+  font-weight: bolder;
+  border: none;
+  margin-left: 40px;
+  margin-right: 40px;
+  width:75px;
+  position: relative;
+}
+
+.room-image {
+  position: fixed;
+  top: 52.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 464px;
+  width: 531px;
+}
+
 .hexfield {
   position: absolute;
   fill: transparent;
@@ -85,7 +133,4 @@ body, html {
 }
 .hexfield:hover {
   fill: rgba(0, 0, 0, .4);
-}
-.hexfield.clicked{
-  fill: rgba(0, 0, 0, .6);
 }
