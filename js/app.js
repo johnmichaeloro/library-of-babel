@@ -1,5 +1,7 @@
 //Library of Babel
 
+$('#leave').hide();
+
 //What follows is the HexGridWidget I used to generate the gameboard. I was given permission to use this widget by my instructor, Ryan Fleharty.
 $.fn.hexGridWidget = function (radius, columns, rows, cssClass) {
 	'use strict';
@@ -44,29 +46,54 @@ $.fn.hexGridWidget = function (radius, columns, rows, cssClass) {
 
 //End of HexGridWidget
 
-$('#floorplan').hexGridWidget(55, 11, 5, 'hexfield');
-$('.game-window').hide();
-$('.night').hide();
-$('.room-image').hide();
+//For the intro, I want the hexagon to be present with the intro text and a begin button.
+//I need the intro text to be the default hexagon text.
+//Once begin is clicked, the hexagon and night are hidden.
+//The text and button need to be .removed
+//Then, when a hexagon turns black after being clicked
+//The hex and night mode appear again
+//And game text is appended along with the stay and leave buttons
+//The buttons are appended once
+//The text is different each click
+//
+//<button class="decision-btn">Leave</button>
 
-const $fadeInGameWindow = () => {
-	$('.game-window').fadeIn(1500);
+$('#floorplan').hexGridWidget(55, 11, 5, 'hexfield');
+
+$('.game-text').text("The Library is composed of an endless number of hexagonal rooms. Each room holds hundreds of books. Most of these books contain gibberish. Your life’s work is to find the Library’s few coherent words, sentences, and pages.");
+
+const $beginGame = () => {
+	$('.game-window').hide();
+	$('.room-image').hide();
+	$('.night').hide();
 }
 
-const $fadeInRoom = () => {
-	$('.room-image').show($fadeInGameWindow);
+$('#begin').on('click', () => {
+	$beginGame();
+})
+
+const $fadeInGame = () => {
+	$('.room-image').fadeIn(15);
+	$('.game-window').fadeIn(15);
 }
 
 const $fadeInNight = () => {
-	$('.night').show($fadeInRoom);
+	$('.night').fadeIn(250, $fadeInGame);
 }
 
 $('#floorplan .hexfield').click(function () {
+	$('#stayBegin').text("Stay");
+	$('#leave').show();
+	$('.game-text').empty();
 	$fadeInNight();
 });
 
-$('.decision-btn').on('click', () => {
+const $fadeOutGame = () => {
 	$('.room-image').fadeOut(100);
 	$('.game-window').fadeOut(100);
-	$('.night').fadeOut(1000);
+	$('.night').fadeOut(250);
+}
+
+$('.decision-btn').on('click', () => {
+	$fadeOutGame();
 })

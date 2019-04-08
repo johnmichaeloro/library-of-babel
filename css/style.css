@@ -94,9 +94,16 @@ body, html {
   font-weight: bolder;
 }
 
+.hexContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 p {
   position: relative;
-  padding-top: 40px;
+  padding-top: 35px;
   padding-left: 35px;
   padding-right: 35px;
 }
@@ -107,14 +114,14 @@ p {
   font-size: 26px;
   font-weight: bolder;
   border: none;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 25px;
+  margin-right: 25px;
   width:75px;
   position: relative;
 }
 
 .room-image {
-  position: fixed;
+  position: absolute;
   top: 52.5%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -122,6 +129,7 @@ p {
   width: 531px;
 }
 
+svg {}
 .hexfield {
   position: absolute;
   fill: transparent;
