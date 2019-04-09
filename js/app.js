@@ -1,4 +1,4 @@
-//Library of Babel
+//Library of Babel JS
 
 $('#stay').hide();
 
@@ -157,7 +157,7 @@ const rooms = [
 	},
 	{
 		description: 'You take a book from each shelf in this room and examine it. Every sentence you read contains exactly 100 characters. Though the number of times a given character appears is the same in each sentence, its order of appearance is different.',
-		consequence: 'After many years, you depart this hexagon in disgust. In all its books, never once did the repeating characters form a coherent sentence. The closest they ever came was, “George Grapes lifted the mug to his lips, took a sip of the bitter coffee, and sighed with pleasurg.”',
+		consequence: 'After many years, you depart this room in disgust. In all of its books, never once did the repeating characters form a coherent sentence. The closest they ever came was, “George Grapes lifted the mug to his lips, took a sip of the bitter coffee, and sighed with pleasurg.”',
 		words: 18,
 		sentences: 0,
 		pages: 0,
@@ -177,7 +177,7 @@ const rooms = [
 	},
 	{
 		description: 'There is no one in this hexagon, and yet you feel as though you are being watched.',
-		consequence: 'You find a single paragraph. "He watched the searcher read the paragraph. He clenched his hands, wishing he could clench them around the searcher’s neck. He stood only a few feet behind the searcher. He took a step forward." You leave this hexagon quickly.',
+		consequence: 'You find a single paragraph. "He watched the searcher read the paragraph. He clenched his hands, wishing he could clench them around the searcher’s neck. He stood only a few feet behind the searcher. He took a step forward."',
 		words: 0,
 		sentences: 4,
 		pages: 0,
@@ -196,7 +196,7 @@ const rooms = [
 		}
 	},
 	{
-		description: '“I am the Book Man,” shouts a librarian. He gestures at the book he is reading. “You can become the Book Man too.” His pupils are different sizes. One is so large it has eclipsed its iris, while the other is as small as a distant star.',
+		description: '“I am the Book Man,” shouts a librarian. He gestures at the book he is reading. “You can become the Book Man, too.” His pupils are different sizes. One is so large it has eclipsed its iris, while the other is as small as a distant star.',
 		consequence: 'You sit beside him and read from the book. A sense of joy fills you as you realize you are reading the perfect compendium of all books. Blessed with the total knowledge of the Library, you become the Book Man.',
 		words: Math.floor(Math.random() * 1000),
 		sentences: Math.floor(Math.random() * 1000),
@@ -251,9 +251,17 @@ const outcomes = {
 		obscurity: "Obscurity",
 	}
 
+
+
 $('#floorplan').hexGridWidget(55, 11, 5, 'hexfield');
 
-$('.game-text').text("The Library is composed of an endless number of hexagonal rooms. Each room holds hundreds of books. Most of the books contain gibberish. Your life’s work is to find the Library’s few coherent words, sentences, and pages.");
+const introText = "The Library is composed of an endless number of hexagonal rooms. Each room holds hundreds of books. Most of the books contain gibberish. Your life’s work is to find the Library’s few coherent words, sentences, and pages.";
+
+const introCard = () => {
+		$('.game-text').text(introText);
+}
+
+introCard();
 
 roomInPlay = [];
 
@@ -272,28 +280,89 @@ const $fadeOutGame = () => {
 	$('.night').fadeOut(250);
 }
 
-let finalScore = ((score.words) + (score.sentences * 10) + (score.pages * 100));
-
 const endGame = () => {
-	if(score.age >= 72) {
-		$('.game-text').empty();
-		
+	$('.game-text').empty();
+	$('#stay').hide();
+	$('#leaveBegin').text("Finish");
+	$fadeInNight();
+	let finalScore = ((score.words) + (score.sentences * 10) + (score.pages * 100));
 		if(finalScore <= 200) {
 			$('.game-text').append(outcomes.obscurity);
+			$('#leaveBegin').on('click', () => {
+					$fadeOutGame();
+					score.words = 0;
+					score.sentences = 0;
+					score.pages = 0;
+					score.age = 18;
+					score.showWords();
+					score.showSentences();
+					score.showPages();
+					score.showAge();
+			});
 		} else if(finalScore <= 500) {
-			$('.game-text').append(outcomes.medoicrity);
+			$('.game-text').append(outcomes.ignominy);
+			$('#leaveBegin').on('click', () => {
+					$fadeOutGame();
+					score.words = 0;
+					score.sentences = 0;
+					score.pages = 0;
+					score.age = 18;
+					score.showWords();
+					score.showSentences();
+					score.showPages();
+					score.showAge();
+			});
 		} else if(finalScore <= 1000) {
 			$('.game-text').append(outcomes.medoicrity);
+			$('#leaveBegin').on('click', () => {
+					$fadeOutGame();
+					score.words = 0;
+					score.sentences = 0;
+					score.pages = 0;
+					score.age = 18;
+					score.showWords();
+					score.showSentences();
+					score.showPages();
+					score.showAge();
+			});
+		} else if(finalScore <= 2000) {
+			$('.game-text').append(outcomes.glory);
+			$('#leaveBegin').on('click', () => {
+					$fadeOutGame();
+					score.words = 0;
+					score.sentences = 0;
+					score.pages = 0;
+					score.age = 18;
+					score.showWords();
+					score.showSentences();
+					score.showPages();
+					score.showAge();
+			});
+		} else if(finalScore > 2000) {
+			$('.game-text').append(outcomes.vindication);
+			$('#leaveBegin').on('click', () => {
+					$fadeOutGame();
+					score.words = 0;
+					score.sentences = 0;
+					score.pages = 0;
+					score.age = 18;
+					score.showWords();
+					score.showSentences();
+					score.showPages();
+					score.showAge();
+			});
 		}
 	}
-}
 
-//If you leave a room without staying, the css remains transparent
 
 $('#leaveBegin').on('click', () => {
-	roomInPlay = [];
-	endGame();
-	$fadeOutGame();
+	if(score.age >= 72) {
+		roomInPlay = [];
+		endGame();
+	} else {
+		roomInPlay = [];
+		$fadeOutGame();
+	}
 })
 
 $('#floorplan .hexfield').click(function (e) {
@@ -304,6 +373,7 @@ $('#floorplan .hexfield').click(function (e) {
 		roomInPlay.unshift(rooms.splice([Math.floor(Math.random() * rooms.length) + 0], 1));
 		$('.game-text').append(roomInPlay[0][0].description);
 		$fadeInNight();
+		$(this).unbind('click');
 });
 
 $('#stay').on('click', () => {
@@ -320,3 +390,10 @@ $('#stay').on('click', () => {
 	score.showAge();
 	roomInPlay = [];
 })
+
+
+//If the screen is filled with dark hexs, a new room prompt and cleared hexes (css transparent on the whole field)
+//Then I need to add  content
+//I need more "standard scenarios" instead of endgame scenarios
+//I could ahve Booleans for the instant end game rooms: for the Crimson Hexagon: true, etc.
+//What negative scenario can I create? The Purifiers take your score!!!
