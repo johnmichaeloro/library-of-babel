@@ -113,7 +113,7 @@ const originalRooms = [
 		consequence: 'You sit at a desk and take the thin volume from his hands. While showing him how to pronounce each letter, you realize the first page is in English. As you read on, you discover the book is about your life. After a few pages, it begins to describe your future.',
 		words: 307,
 		sentences: 125,
-		pages: 33,
+		pages: 24,
 		years: 72,
 		addWords: function() {
 			score.words = this.words;
@@ -289,7 +289,7 @@ const originalRooms = [
 		}
 	},
 	{
-		description: 'While reading the books in this hexagon, you encounter two that appear to be identical. "But this is impossible," you cry. "No two books in the library are identical!"',
+		description: 'While reading the books in this hexagon, you encounter two that appear identical. "But this is impossible," you cry. "No two books in the library are identical!"',
 		consequence: "You spend eight years carefully examining the two books. When you finally realize your error, you groan. You mistook a punctuation mark on page 305 of the second book for a period. It took you eight years to realize it's a comma.",
 		words: 0,
 		sentences: 0,
@@ -309,7 +309,7 @@ const originalRooms = [
 		}
 	},
 	{
-		description: 'This hexagon looks just like any other. It is lit by two dim lamps. Four of its walls are lined with books. In its center, a low railing surrounds a ventilation shaft.',
+		description: 'This hexagon looks just like any other. In its center, a low railing surrounds a ventilation shaft. Four of its walls are lined with books. It is lit by two dim lamps.',
 		consequence: 'You find as many words, sentences, and pages as you might expect. Finding them takes what you might call an average amount of time.',
 		words: Math.floor(Math.random() * 10) + 4,
 		sentences: Math.floor(Math.random() * 5) + 1,
@@ -358,7 +358,7 @@ const originalRooms = [
 
 const outcomes = {
 		blessing: "More searchers enter the hexagon. They all read the perfect compendium. They all enjoy the bliss of total knowledge.",
-		vindication: "You have found what all searchers seek. You have found your vindication, the volume that validates your searching, the book that reveals your future. You die happily, living on in the memory of your people as a legend.",
+		vindication: "You have found your vindication, the volume that validates your searching, the book that reveals your future. You die happily, living on in the memory of your people as a legend.",
 		glory: "With the power of the Crimson Hexagon at your command, you become the ruler of the Library. You live forever, knowing the contents of every book, worshipped by the Library's inhabitants as a living god.",
 		medoicrity: "When you die, your friends and family gather to mourn you. Everyone agrees you lived a full life. Though they speak of your catalog with admiration, your work is forgotten in a generation.",
 		ignominy: 'After your death, you become a cautionary tale other searchers tell one another. "Take care not to end up like that one," they say. "Take care not to spend your whole life searching, and find nothing."',
@@ -411,7 +411,7 @@ const endGame = () => {
 					$fadeOutGame();
 					location.reload(true);
 			});
-		} else if(finalScore < 500 && finalScore <= 1000) {
+		} else if(finalScore > 500 && finalScore <= 1000) {
 			$('.game-text').append(outcomes.obscurity);
 			$('#leaveBegin').on('click', () => {
 					$fadeOutGame();
