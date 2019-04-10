@@ -1,7 +1,5 @@
 //Library of Babel JS
 
-$('#stay').hide();
-
 //What follows is the HexGridWidget I used to generate the gameboard. I was given permission to use this widget by my instructor, Ryan Fleharty.
 $.fn.hexGridWidget = function (radius, columns, rows, cssClass) {
 	'use strict';
@@ -67,14 +65,9 @@ const score = {
 	}
 }
 
-score.showWords();
-score.showSentences();
-score.showPages();
-score.showAge();
-
 //Array of Room Objects
 
-const rooms = [
+const originalRooms = [
 	{
 		description: 'As you enter this hexagon, a librarian seated at a desk lifts his head. "A visitor," he murmurs, "how nice." He introduces himself as George Grapes. You notice he is blind.',
 		consequence: 'You spend several years discussing the mysteries of life with George. Is the library infinite? Does the Crimson Hexagon exist? When you finally bid him farewell, you realize how little you have read.',
@@ -98,41 +91,41 @@ const rooms = [
 	{
 		description: 'From its bookshelves to its desks and chairs, everything in this hexagon is built of red cedar. Small volumes bound in crimson leather line the walls. In the distance, you hear angry voices.',
 		consequence: 'As you read one of the red books, the air around you shimmers. A mob of Purifiers rushes into the room, shaking their fists and shouting. You lift your hand and they fall to their knees, overcome by the power of the Crimson Hexagon.',
-		words: Math.floor(Math.random() * 1000),
-		sentences: Math.floor(Math.random() * 1000),
-		pages: Math.floor(Math.random() * 1000),
-		years: Math.floor(Math.random() + 54),
+		words: 231,
+		sentences: 73,
+		pages: 18,
+		years: 72,
 		addWords: function() {
-			score.words = score.words += this.words;
+			score.words = this.words;
 		},
 		addSentences: function() {
-			score.sentences = score.sentences += this.sentences;
+			score.sentences = this.sentences;
 		},
 		addPages: function() {
-			score.pages = score.pages += this.pages;
+			score.pages = this.pages;
 		},
 		addYears: function() {
-			score.age = score.age += this.years;
+			score.age = this.years;
 		}
 	},
 	{
 		description: 'You watch a teenage boy lower his head to reverently kiss a book. "This book is sacred," he tells you. "Please, teach me to read it."',
 		consequence: 'You sit at a desk and take the thin volume from his hands. While showing him how to pronounce each letter, you realize the first page is in English. As you read on, you discover the book is about your life. After a few pages, it begins to describe your future.',
-		words: Math.floor(Math.random() * 1000),
-		sentences: Math.floor(Math.random() * 1000),
-		pages: Math.floor(Math.random() * 1000),
-		years: Math.floor(Math.random() + 54),
+		words: 307,
+		sentences: 125,
+		pages: 33,
+		years: 72,
 		addWords: function() {
-			score.words = score.words += this.words;
+			score.words = this.words;
 		},
 		addSentences: function() {
-			score.sentences = score.sentences += this.sentences;
+			score.sentences = this.sentences;
 		},
 		addPages: function() {
-			score.pages = score.pages += this.pages;
+			score.pages = this.pages;
 		},
 		addYears: function() {
-			score.age = score.age += this.years;
+			score.age = this.years;
 		}
 	},
 	{
@@ -157,7 +150,7 @@ const rooms = [
 	},
 	{
 		description: 'You take a book from each shelf in this room and examine it. Every sentence you read contains exactly 100 characters. Though the number of times a given character appears is the same in each sentence, its order of appearance is different.',
-		consequence: 'After many years, you depart this hexagon in disgust. In all of its books, never once did the repeating characters form a coherent sentence. The closest they ever came was, “George Grapes lifted the mug to his lips, took a sip of the bitter coffee, and sighed with pleasurg.”',
+		consequence: 'After many years, you leave this room in disgust. In all of its books, never once did the repeating characters form a coherent sentence. The closest they ever came was, “George Grapes lifted the mug to his lips, took a sip of the bitter coffee, and sighed with pleasurg.”',
 		words: 18,
 		sentences: 0,
 		pages: 0,
@@ -198,25 +191,25 @@ const rooms = [
 	{
 		description: '“I am the Book Man,” shouts a librarian. He gestures at the book he is reading. “You can become the Book Man, too.” His pupils are different sizes. One is so large it has eclipsed its iris, while the other is as small as a distant star.',
 		consequence: 'You sit beside him and read from the book. A sense of joy fills you as you realize you are reading the perfect compendium of all books. Blessed with the total knowledge of the Library, you become the Book Man.',
-		words: Math.floor(Math.random() * 1000),
-		sentences: Math.floor(Math.random() * 1000),
-		pages: Math.floor(Math.random() * 1000),
-		years: Math.floor(Math.random() + 54),
+		words: 534,
+		sentences: 188,
+		pages: 92,
+		years: 72,
 		addWords: function() {
-			score.words = score.words += this.words;
+			score.words = this.words;
 		},
 		addSentences: function() {
-			score.sentences = score.sentences += this.sentences;
+			score.sentences = this.sentences;
 		},
 		addPages: function() {
-			score.pages = score.pages += this.pages;
+			score.pages = this.pages;
 		},
 		addYears: function() {
-			score.age = score.age += this.years;
+			score.age = this.years;
 		}
 	},
 	{
-		description: 'In this room, a mob of angry men and women rip books from their shelves and tear the pages from their spines. “Join us,” one of them commands you. “Together, we will destroy the blasphemies of this library!”',
+		description: 'In this room, a mob of angry men and women rip books from the shelves and tear  pages from their spines. “Join us,” one of them commands you. “Together, we will destroy this blasphemous library!”',
 		consequence: 'When the Purifiers discover you are a searcher, they take your catalog and throw it over the railing. To punish you for your crimes, they imprison you for ten years.',
 		words: 0,
 		sentences: 0,
@@ -236,7 +229,7 @@ const rooms = [
 		}
 	},
 	{
-		description: 'A woman descends the spiral staircase in the center of this hexagon. “I am a cryptographer,” she says. “I have discovered the secret code of this library. With my code, every line of gibberish can be transformed into the purest wisdom.”',
+		description: 'A woman descends the spiral staircase beside this hexagon. “I am a cryptographer,” she says. “I have discovered the secret code of this library. With my code, every line of gibberish can be transformed into the purest wisdom.”',
 		consequence: "You spend seven years learning the cryptographer's secret code. Unfortunately, it only transforms the Library’s gibberish into the cryptographer’s gibberish.",
 		words: 0,
 		sentences: 0,
@@ -257,7 +250,7 @@ const rooms = [
 	},
 	{
 		description: '“Get out,” an old woman snarls at you. “I have been looking for this hexagon my entire life. You will not steal its treasures from me!”',
-		consequence: 'One night as you are sleeping, the old woman throws you over the railing. You fall several stories before you are caught in a net laid by a librarian who heard your cries. It takes several years for you to recover from the fall.',
+		consequence: 'One night as you are sleeping, the old woman throws you over the railing. You fall several stories before you are caught in a net laid by a librarian who heard your cries. It takes several years for you to recover from your injuries.',
 		words: 0,
 		sentences: 0,
 		pages: 0,
@@ -276,12 +269,52 @@ const rooms = [
 		}
 	},
 	{
-		description: 'An old man has collapsed on the floor of this hexagon. He reaches for you, his hand trembling. “Please,” he begs, “throw me over the railing when I die. If you promise, I will give you something.”',
-		consequence: 'You make the promise and the old man gives you his catalog. When he dies, you throw his body over the railing.',
+		description: 'An old man has collapsed on the floor of this hexagon. He reaches for you, his hands trembling. “Please,” he begs, “throw me over the railing when I die.”',
+		consequence: 'You promise to do so and in gratitude the old man gives you his catalog. When he dies, you throw his body over the railing.',
 		words: Math.floor(Math.random() * 23) + 7,
 		sentences: Math.floor(Math.random() * 15) + 4,
 		pages: Math.floor(Math.random() * 5) +2,
 		years: 0,
+		addWords: function() {
+			score.words = score.words += this.words;
+		},
+		addSentences: function() {
+			score.sentences = score.sentences += this.sentences;
+		},
+		addPages: function() {
+			score.pages = score.pages += this.pages;
+		},
+		addYears: function() {
+			score.age = score.age += this.years;
+		}
+	},
+	{
+		description: 'While reading the books in this hexagon, you encounter two that appear to be identical. "But this is impossible," you cry. "No two books in the library are identical!"',
+		consequence: "You spend eight years carefully examining the two books. When you finally realize your error, you groan. You mistook a punctuation mark on page 305 of the second book for a period. It took you eight years to realize it's a comma.",
+		words: 0,
+		sentences: 0,
+		pages: 0,
+		years: 8,
+		addWords: function() {
+			score.words = score.words += this.words;
+		},
+		addSentences: function() {
+			score.sentences = score.sentences += this.sentences;
+		},
+		addPages: function() {
+			score.pages = score.pages += this.pages;
+		},
+		addYears: function() {
+			score.age = score.age += this.years;
+		}
+	},
+	{
+		description: 'This hexagon looks just like any other. It is lit by two dim lamps. Four of its walls are lined with books. In its center, a low railing surrounds a ventilation shaft.',
+		consequence: 'You find as many words, sentences, and pages as you might expect. Finding them takes what you might call an average amount of time.',
+		words: Math.floor(Math.random() * 10) + 4,
+		sentences: Math.floor(Math.random() * 5) + 1,
+		pages: Math.floor(Math.random() * 2),
+		years: Math.floor(Math.random() * 7) + 3,
 		addWords: function() {
 			score.words = score.words += this.words;
 		},
@@ -324,26 +357,32 @@ const rooms = [
 //Array of Outcome Objects
 
 const outcomes = {
-		vindication: "Vindication",
-		glory: "Glory",
-		medoicrity: "Mediocrity",
-		ignominy: "Ignominy",
-		obscurity: "Obscurity",
+		blessing: "More searchers enter the hexagon. They all read the perfect compendium. They all enjoy the bliss of total knowledge.",
+		vindication: "You have found what all searchers seek. You have found your vindication, the volume that validates your searching, the book that reveals your future. You die happily, living on in the memory of your people as a legend.",
+		glory: "With the power of the Crimson Hexagon at your command, you become the ruler of the Library. You live forever, knowing the contents of every book, worshipped by the Library's inhabitants as a living god.",
+		medoicrity: "When you die, your friends and family gather to mourn you. Everyone agrees you lived a full life. Though they speak of your catalog with admiration, your work is forgotten in a generation.",
+		ignominy: 'After your death, you become a cautionary tale other searchers tell one another. "Take care not to end up like that one," they say. "Take care not to spend your whole life searching, and find nothing."',
+		obscurity: "Your body is tossed without ceremony over the railing of the hexagon in which you die. Your catalog becomes a small footnote in an obscure compendium.",
 	}
-
-
-
-$('#floorplan').hexGridWidget(55, 11, 5, 'hexfield');
 
 const introText = "The Library is composed of an endless number of hexagonal rooms. Each room holds hundreds of books. Most of these books contain gibberish. Your life’s work is to find the Library’s few coherent words, sentences, and pages.";
 
-const introCard = () => {
-		$('.game-text').text(introText);
+let rooms = [];
+
+let roomInPlay = [];
+
+const newGame = () => {
+	$('#floorplan').hexGridWidget(55, 11, 5, 'hexfield');
+	rooms = originalRooms.splice(0);
+	$('#stay').hide();
+	$('.game-text').text(introText);
+	score.showWords();
+	score.showSentences();
+	score.showPages();
+	score.showAge();
 }
 
-introCard();
-
-roomInPlay = [];
+newGame();
 
 const $fadeInGame = () => {
 	$('.room-image').fadeIn(15);
@@ -366,32 +405,38 @@ const endGame = () => {
 	$('#leaveBegin').text("Finish");
 	$fadeInNight();
 	let finalScore = ((score.words) + (score.sentences * 10) + (score.pages * 100));
-		if(finalScore <= 200) {
-			$('.game-text').append(outcomes.obscurity);
-			$('#leaveBegin').on('click', () => {
-					$fadeOutGame();
-					location.reload(true);
-			});
-		} else if(finalScore <= 500) {
+		if(finalScore <= 500) {
 			$('.game-text').append(outcomes.ignominy);
 			$('#leaveBegin').on('click', () => {
 					$fadeOutGame();
 					location.reload(true);
 			});
-		} else if(finalScore <= 1000) {
+		} else if(finalScore < 500 && finalScore <= 1000) {
+			$('.game-text').append(outcomes.obscurity);
+			$('#leaveBegin').on('click', () => {
+					$fadeOutGame();
+					location.reload(true);
+			});
+		} else if(finalScore > 1000 && finalScore <= 2000) {
 			$('.game-text').append(outcomes.medoicrity);
 			$('#leaveBegin').on('click', () => {
 					$fadeOutGame();
 					location.reload(true);
 			});
-		} else if(finalScore <= 2000) {
+		} else if(finalScore > 2000 && finalScore <= 3000) {
 			$('.game-text').append(outcomes.glory);
 			$('#leaveBegin').on('click', () => {
 					$fadeOutGame();
 					location.reload(true);
 			});
-		} else if(finalScore > 2000) {
+		} else if(finalScore > 3000 && finalScore <= 4000) {
 			$('.game-text').append(outcomes.vindication);
+			$('#leaveBegin').on('click', () => {
+					$fadeOutGame();
+					location.reload(true);
+			});
+		} else if(finalScore > 4000) {
+			$('.game-text').append(outcomes.blessing);
 			$('#leaveBegin').on('click', () => {
 					$fadeOutGame();
 					location.reload(true);
@@ -401,7 +446,7 @@ const endGame = () => {
 
 
 $('#leaveBegin').on('click', () => {
-	if(score.age >= 72) {
+	if(score.age >= 72 || rooms.length === 0) {
 		roomInPlay = [];
 		endGame();
 	} else {
@@ -435,10 +480,3 @@ $('#stay').on('click', () => {
 	score.showAge();
 	roomInPlay = [];
 })
-
-
-//If the screen is filled with dark hexs, a new room prompt and cleared hexes (css transparent on the whole field)
-//Then I need to add  content
-//I need more "standard scenarios" instead of endgame scenarios
-//I could ahve Booleans for the instant end game rooms: for the Crimson Hexagon: true, etc.
-//What negative scenario can I create? The Purifiers take your score!!!
