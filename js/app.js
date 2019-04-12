@@ -89,7 +89,7 @@ const originalRooms = [
 		}
 	},
 	{
-		description: 'From its bookshelves to its desks and chairs, everything in this hexagon is built of red cedar. Small volumes bound in crimson leather line the walls. In the distance, you hear angry voices.',
+		description: 'From its bookshelves to its desks and chairs, everything in this hexagon is built of red cedar. Small volumes bound in crimson leather line its walls. In the distance, you hear angry voices.',
 		consequence: 'As you read one of the red books, the air around you shimmers. A mob of Purifiers rushes into the room, shaking their fists and shouting. You lift your hand and they fall to their knees, overcome by the power of the Crimson Hexagon.',
 		words: 231,
 		sentences: 73,
@@ -209,7 +209,7 @@ const originalRooms = [
 		}
 	},
 	{
-		description: 'In this room, a mob of angry men and women rip books from the shelves and tear  pages from their spines. “Join us,” one of them commands you. “Together, we will destroy this blasphemous library!”',
+		description: 'In this room, a mob of angry men and women rip the books from their shelves and tear the pages from their spines. “Join us,” one of them commands you. “Together, we will destroy this blasphemous library!”',
 		consequence: 'When the Purifiers discover you are a searcher, they take your catalog and throw it over the railing. To punish you for your crimes, they imprison you for ten years.',
 		words: 0,
 		sentences: 0,
@@ -229,7 +229,7 @@ const originalRooms = [
 		}
 	},
 	{
-		description: 'A woman descends the spiral staircase beside this hexagon. “I am a cryptographer,” she says. “I have discovered the secret code of this library. With my code, every line of gibberish can be transformed into the purest wisdom.”',
+		description: 'A woman descends the spiral staircase beside the entrance to this hexagon. “I am a cryptographer,” she says. “I have discovered the secret code of this library. With my code, every line of gibberish can be transformed into the purest wisdom.”',
 		consequence: "You spend seven years learning the cryptographer's secret code. Unfortunately, it only transforms the Library’s gibberish into the cryptographer’s gibberish.",
 		words: 0,
 		sentences: 0,
@@ -250,7 +250,7 @@ const originalRooms = [
 	},
 	{
 		description: '“Get out,” an old woman snarls at you. “I have been looking for this hexagon my entire life. You will not steal its treasures from me!”',
-		consequence: 'One night as you are sleeping, the old woman throws you over the railing. You fall several stories before you are caught in a net laid by a librarian who heard your cries. It takes several years for you to recover from your injuries.',
+		consequence: 'One night as you are sleeping, the old woman throws you over the railing. You fall several stories before you are caught in a net laid by a librarian who heard your cries. It takes many years for you to recover from your injuries.',
 		words: 0,
 		sentences: 0,
 		pages: 0,
@@ -289,8 +289,8 @@ const originalRooms = [
 		}
 	},
 	{
-		description: 'While reading the books in this hexagon, you encounter two that appear identical. "But this is impossible," you cry. "No two books in the library are identical!"',
-		consequence: "You spend eight years carefully examining the two books. When you finally realize your error, you groan. You mistook a punctuation mark on page 305 of the second book for a period. It took you eight years to realize it's a comma.",
+		description: 'While reading the books in this hexagon, you encounter two that appear identical. "But this is impossible," you cry. "No two books in the library are the same!"',
+		consequence: "You spend eight years carefully examining the two books. When you finally realize your mistake, you groan. You thought the punctuation mark on line 23 of page 305 in the second book was a period. It took you eight years to realize it's a comma.",
 		words: 0,
 		sentences: 0,
 		pages: 0,
@@ -309,8 +309,8 @@ const originalRooms = [
 		}
 	},
 	{
-		description: 'This hexagon looks just like any other. In its center, a low railing surrounds a ventilation shaft. Four of its walls are lined with books. It is lit by two dim lamps.',
-		consequence: 'You find as many words, sentences, and pages as you might expect. Finding them takes what you might call an average amount of time.',
+		description: 'This hexagon looks just like any other. Four of its walls are lined with books. In its center, a low railing surrounds a ventilation shaft. Everything is lit by two dim lamps.',
+		consequence: 'You find as many words, sentences, and pages as you would expect to find in any other hexagon. Finding them takes what you might call an average amount of time.',
 		words: Math.floor(Math.random() * 10) + 4,
 		sentences: Math.floor(Math.random() * 5) + 1,
 		pages: Math.floor(Math.random() * 2),
@@ -323,6 +323,26 @@ const originalRooms = [
 		},
 		addPages: function() {
 			score.pages = score.pages += this.pages;
+		},
+		addYears: function() {
+			score.age = score.age += this.years;
+		}
+	},
+	{
+		description: 'You take a book from a shelf and flip through its pages. On each page, the letters have been shaped into an intricate maze. You open another book and find a maze on each of its pages as well.',
+		consequence: 'You do not know how much time has passed. You have been lost in the mazes for so long that you have gone a little mad. You wander off, leaving your catalog behind you.',
+		words: 0,
+		sentences: 0,
+		pages: 0,
+		years: Math.floor(Math.random() * 10) + 2,
+		addWords: function() {
+			score.words = this.words;
+		},
+		addSentences: function() {
+			score.sentences = this.sentences;
+		},
+		addPages: function() {
+			score.pages = this.pages;
 		},
 		addYears: function() {
 			score.age = score.age += this.years;
@@ -361,7 +381,7 @@ const outcomes = {
 		vindication: "You have found your vindication, the volume that validates your searching, the book that reveals your future. You die happily, living on in the memory of your people as a legend.",
 		glory: "With the power of the Crimson Hexagon at your command, you become the ruler of the Library. You live forever, knowing the contents of every book, worshipped by the Library's inhabitants as a living god.",
 		medoicrity: "When you die, your friends and family gather to mourn you. Everyone agrees you lived a full life. Though they speak of your catalog with admiration, your work is forgotten in a generation.",
-		ignominy: 'After your death, you become a cautionary tale other searchers tell one another. "Take care not to end up like that one," they say. "Take care not to spend your whole life searching, and find nothing."',
+		ignominy: 'After your death, you become a cautionary tale that the other searchers tell one another. "Take care not to end up like that one," they say. "Take care not to spend your whole life searching and find nothing."',
 		obscurity: "Your body is tossed without ceremony over the railing of the hexagon in which you die. Your catalog becomes a small footnote in an obscure compendium.",
 	}
 
